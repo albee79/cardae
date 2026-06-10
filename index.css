@@ -1,0 +1,177 @@
+import React, { useState } from "react";
+import { DINASTIA_DEMO_CARDS } from "../data";
+import { Sparkles, RefreshCw, HelpCircle, Layers } from "lucide-react";
+
+export default function CardFlipPreview() {
+  const [activeCardId, setActiveCardId] = useState<string>("florio_1");
+  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+
+  const toggleFlip = (id: string) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const selectedCard = DINASTIA_DEMO_CARDS.find((c) => c.id === activeCardId) || DINASTIA_DEMO_CARDS[0];
+
+  return (
+    <div className="w-full max-w-5xl mx-auto rounded-3xl bg-stone-900 border border-stone-800 p-6 md:p-12 shadow-2xl overflow-hidden relative">
+      {/* Absolute Decorative Blurs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-900/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center position-relative z-10">
+        {/* Left column: Selector & Narrative description */}
+        <div className="lg:col-span-5 space-y-6">
+          <div className="space-y-2">
+            <span className="text-amber-500 font-mono tracking-widest text-xs uppercase flex items-center gap-1.5 font-semibold">
+              <Layers className="w-3.5 h-3.5" /> The Proof of Concept
+            </span>
+            <h3 className="text-3xl font-serif font-medium tracking-tight text-stone-100">
+              Dinastia di Sicilia
+            </h3>
+            <p className="text-stone-400 text-sm leading-relaxed max-w-md">
+              Our inaugural heritage deck dedicated to the Florio family, the most iconic dynasty in Sicilian history. It is a tactile masterpiece formatted as a premium editorial work.
+            </p>
+          </div>
+
+          {/* Tab Selector */}
+          <div className="flex flex-col gap-2">
+            {DINASTIA_DEMO_CARDS.map((card) => (
+              <button
+                key={card.id}
+                onClick={() => {
+                  setActiveCardId(card.id);
+                  // Auto flip to front on select
+                  setFlippedCards((prev) => ({ ...prev, [card.id]: false }));
+                }}
+                className={`text-left p-3.5 rounded-xl border transition-all duration-300 flex items-center justify-between ${
+                  activeCardId === card.id
+                    ? "bg-stone-800 border-amber-600/50 text-stone-100 pl-4 shadow-md"
+                    : "bg-stone-900/40 border-stone-850 hover:border-stone-700 text-stone-400 hover:text-stone-250 hover:bg-stone-800/30"
+                }`}
+              >
+                <div>
+                  <div className="font-mono text-[10px] tracking-wider text-stone-500">
+                    CARD #{String(card.cardNumber).padStart(2, "0")}
+                  </div>
+                  <div className="text-sm font-serif font-medium">{card.title}</div>
+                </div>
+                <span className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded bg-stone-950 text-stone-500 font-mono border border-stone-800 transition-colors ${
+                  activeCardId === card.id ? "text-amber-500 border-amber-600/30" : ""
+                }`}>
+                  {card.subtitle.split(" ").slice(-1)[0]}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="p-4 bg-stone-950/40 border border-stone-800/60 rounded-xl">
+            <p className="text-xs text-stone-500 italic flex items-start gap-2.5">
+              <HelpCircle className="w-5 h-5 text-amber-500/60 shrink-0 mt-0.5" />
+              <span>
+                "Every client meeting begins with someone holding this physical deck. They run their fingers over the copper edges, and immediately understand why their story deserves a deck."
+              </span>
+            </p>
+          </div>
+        </div>
+
+        {/* Right column: Interactive 3D Card Visualizer */}
+        <div className="lg:col-span-7 flex flex-col items-center justify-center p-4">
+          <div className="text-center mb-4">
+            <button
+              onClick={() => toggleFlip(selectedCard.id)}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-300 hover:text-stone-100 text-xs font-mono transition-all duration-200"
+            >
+              <RefreshCw className="w-3.5 h-3.5 animate-spin-slow" />
+              <span>Click Card to Flip (Flipped: {flippedCards[selectedCard.id] ? "Back" : "Front"})</span>
+            </button>
+          </div>
+
+          {/* Perspective Container */}
+          <div className="perspective-1200 w-full max-w-[340px] aspect-[5/7] cursor-pointer" onClick={() => toggleFlip(selectedCard.id)}>
+            <div
+              className={`relative w-full h-full transition-transform duration-750 transform-style-3d ${
+                flippedCards[selectedCard.id] ? "rotate-y-180" : ""
+              }`}
+            >
+              {/* CARD FRONT: Artistic Illustration / Logo */}
+              <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl bg-gradient-to-br from-stone-900 to-stone-950 border-4 border-amber-600/30 p-6 flex flex-col justify-between shadow-2xl relative select-none">
+                {/* Gilded Border details */}
+                <div className="absolute inset-2 border border-amber-500/10 pointer-events-none rounded-xl" />
+                <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-amber-500/30 rounded-tl pointer-events-none" />
+                <div className="absolute top-3 right-3 w-5 h-5 border-t border-r border-amber-500/30 rounded-tr pointer-events-none" />
+                <div className="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-amber-500/30 rounded-bl pointer-events-none" />
+                <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-amber-500/30 rounded-br pointer-events-none" />
+
+                {/* Card Top Information */}
+                <div className="flex justify-between items-center z-10">
+                  <span className="font-mono text-xs text-amber-500 font-semibold">CARDÆ</span>
+                  <span className="font-mono text-sm font-semibold bg-stone-800 px-2 py-0.5 rounded border border-stone-700 text-amber-400">
+                    #{String(selectedCard.cardNumber).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Elegant Artistic representation */}
+                <div className="flex-1 flex flex-col items-center justify-center py-6 z-10 px-2 text-center">
+                  <div className="w-16 h-16 rounded-full bg-stone-800/80 border border-amber-500/20 flex items-center justify-center mb-6 shadow-inner">
+                    <Sparkles className="w-7 h-7 text-amber-500 animate-pulse" />
+                  </div>
+                  <h4 className="text-2xl font-serif text-stone-100 font-medium tracking-wide mb-1">
+                    {selectedCard.title}
+                  </h4>
+                  <p className="text-stone-400 text-xs font-serif uppercase tracking-widest md:opacity-90">
+                    {selectedCard.subtitle}
+                  </p>
+                </div>
+
+                {/* Card Bottom / Original Style Illustration detail */}
+                <div className="text-center z-10 bg-stone-950/80 rounded-lg p-3 border border-stone-800">
+                  <p className="font-serif italic text-[10px] text-amber-400/80 leading-normal">
+                    {selectedCard.illustrationType}
+                  </p>
+                </div>
+              </div>
+
+              {/* CARD BACK: Editorial Typography Copy */}
+              <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-2xl bg-stone-950 border-4 border-amber-600/40 p-6 flex flex-col justify-between shadow-2xl relative select-none">
+                {/* Gilded Border details */}
+                <div className="absolute inset-2 border border-amber-500/10 pointer-events-none rounded-xl" />
+                
+                {/* Header */}
+                <div className="flex justify-between items-center border-b border-stone-800 pb-2 z-10">
+                  <span className="font-mono text-[9px] text-stone-500 tracking-widest uppercase">HERITAGE DECK</span>
+                  <span className="font-mono text-[10px] text-amber-500">DINASTIA DI SICILIA</span>
+                </div>
+
+                {/* Back Story text */}
+                <div className="flex-1 flex flex-col justify-center py-4 z-10">
+                  <span className="font-mono text-[9px] text-amber-500 tracking-wider mb-1 block uppercase">The Chronicle</span>
+                  <h5 className="font-serif text-base text-stone-100 leading-tight mb-2 font-medium">
+                    {selectedCard.title}
+                  </h5>
+                  <p className="font-serif text-[11px] text-stone-300 leading-relaxed text-justify space-y-1">
+                    {selectedCard.story}
+                  </p>
+                </div>
+
+                {/* Decorative Seal or footer */}
+                <div className="pt-2 border-t border-stone-800 text-center z-10 flex justify-between items-center">
+                  <span className="font-mono text-[9px] text-stone-500">CARDAE DECK #33</span>
+                  <span className="text-[10px] text-amber-600 font-serif italic">Est. 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 text-center">
+            <p className="text-xs text-stone-500 font-mono">
+              Hover on Desktop · Touch/Tap on Mobile
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,6 @@
+{
+  "name": "CARDÆ Website",
+  "description": "Bespoke heritage card decks for sports clubs, brands, and communities with histories worth celebrating.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

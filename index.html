@@ -1,0 +1,382 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState } from "react";
+import {
+  Layers,
+  CheckCircle
+} from "lucide-react";
+
+export default function App() {
+  // Contact Request form states
+  const [contactSubmitted, setContactSubmitted] = useState<boolean>(false);
+  const [contactName, setContactName] = useState<string>("");
+  const [contactOrg, setContactOrg] = useState<string>("");
+  const [contactEmail, setContactEmail] = useState<string>("");
+  const [contactMessage, setContactMessage] = useState<string>("");
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (contactName && contactEmail) {
+      setContactSubmitted(true);
+    }
+  };
+
+  return (
+    <div className="bg-[#FAF9F5] text-stone-800 min-h-screen font-sans antialiased selection:bg-amber-100 selection:text-amber-900 relative">
+      
+      {/* Decorative luxury warm ambient background overlays */}
+      <div className="absolute top-0 inset-x-0 h-[640px] bg-gradient-to-b from-amber-500/[0.04] to-transparent pointer-events-none" />
+
+      {/* Luxury Navigation Header */}
+      <header className="sticky top-0 z-50 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-stone-200/80 transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          
+          <div className="flex items-center gap-2">
+            <span className="font-serif text-2xl font-bold tracking-widest text-amber-700">CARDÆ</span>
+          </div>
+
+          {/* Desktop Nav links */}
+          <nav className="hidden md:flex items-center gap-8 text-xs font-mono tracking-widest text-stone-600 uppercase font-medium">
+            <a href="#what-is-cardae" className="hover:text-amber-700 transition-colors">What is it</a>
+            <a href="#who-we-are" className="hover:text-amber-700 transition-colors">Who we are</a>
+            <a href="#get-started" className="hover:text-amber-700 transition-colors">Get Started</a>
+          </nav>
+
+          {/* Direct trigger */}
+          <div className="flex items-center gap-4">
+            <a
+              href="#get-started"
+              className="px-4 py-2 bg-amber-700 hover:bg-amber-800 text-white text-xs font-mono font-bold tracking-wider uppercase rounded-lg transition-all duration-150 shadow-sm"
+            >
+              Get Started / Demo Deck
+            </a>
+          </div>
+
+        </div>
+      </header>
+
+      {/* 1. HERO SECTION */}
+      <section className="relative pt-12 pb-24 md:py-32 overflow-hidden px-4">
+        {/* Decorative subtle grid backdrop for light theme */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000004_1px,transparent_1px),linear-gradient(to_bottom,#00000004_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+          <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200/50 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-amber-800 shadow-sm">
+            <Layers className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
+            <span>Premium Editorial Objects for Illustrative Storytelling</span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-serif tracking-tight text-stone-900 leading-[1.1]">
+            Every story deserves <span className="italic block text-amber-700 font-normal">a deck.</span>
+          </h1>
+
+          <p className="text-stone-600 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+            We produce bespoke card decks &mdash; premium editorial objects for sports clubs, cultural brands, and communities with histories worth celebrating.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+            <a
+              href="#what-is-cardae"
+              className="w-full sm:w-auto px-8 py-4 bg-white border border-stone-200 hover:border-stone-300 text-stone-800 font-mono tracking-widest text-xs uppercase rounded-xl transition-all duration-150 shadow-sm"
+            >
+              How it works
+            </a>
+            <a
+              href="#get-started"
+              className="w-full sm:w-auto px-8 py-4 bg-amber-700 hover:bg-amber-800 text-white font-mono tracking-widest text-xs uppercase rounded-xl font-bold transition-all duration-150 shadow-md hover:shadow-lg"
+            >
+              Request Demo Deck
+            </a>
+          </div>
+        </div>
+
+        {/* Minimal Hero floating mockup design with light borders */}
+        <div className="max-w-5xl mx-auto mt-16 md:mt-20 border border-stone-200 rounded-2xl p-2 bg-white/40 backdrop-blur-sm shadow-md relative">
+          <div className="p-4 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div className="p-6 bg-white/80 border border-stone-200/80 rounded-xl space-y-1 shadow-sm">
+              <div className="text-amber-800 text-[10px] font-mono font-bold tracking-wider">01 / DISCOVERY</div>
+              <div className="font-serif text-lg text-stone-900">Historical Briefing</div>
+              <p className="text-xs text-stone-500 italic leading-normal">"We learn your records, legends &amp; myths."</p>
+            </div>
+            <div className="p-6 bg-white/80 border border-stone-200/80 rounded-xl space-y-1 shadow-sm">
+              <div className="text-amber-800 text-[10px] font-mono font-bold tracking-wider">02 / ILLUSTRATION</div>
+              <div className="font-serif text-lg text-stone-900">Commissioned Hand-Art</div>
+              <p className="text-xs text-stone-550 italic leading-normal">"Original illustrations. Zero photography rights."</p>
+            </div>
+            <div className="p-6 bg-white/80 border border-stone-200/80 rounded-xl space-y-1 shadow-sm">
+              <div className="text-amber-800 text-[10px] font-mono font-bold tracking-wider">03 / MANUFACTURE</div>
+              <div className="font-serif text-lg text-stone-900">Tactile Masterpieces</div>
+              <p className="text-xs text-stone-550 italic leading-normal">"Custom deck housed in a rigid presentation box."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. WHAT IS CARDÆ & CORE CHARACTERISTICS */}
+      <section className="py-24 border-t border-stone-200/80 bg-stone-100/40 px-4 scroll-mt-20" id="what-is-cardae">
+        <div className="max-w-5xl mx-auto space-y-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-5 space-y-4">
+              <span className="text-amber-700 font-mono tracking-widest text-xs uppercase block font-semibold">
+                An Editorial Canvas
+              </span>
+              <h2 className="text-3xl md:text-5xl font-serif text-stone-900 font-medium tracking-tight">
+                What is <br className="hidden md:block" />
+                <span className="italic font-normal text-amber-700">CARDÆ?</span>
+              </h2>
+              <div className="font-mono text-sm space-y-1 pt-4 text-stone-600">
+                <div className="text-red-700/80 line-through">Not trading cards.</div>
+                <div className="text-red-700/80 line-through">Not Topps.</div>
+                <div className="text-red-700/80 line-through">Not Panini.</div>
+                <div className="text-amber-800 font-bold pt-1">✓ Custom, bespoke historical objects.</div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 space-y-6 text-stone-700 font-sans text-base leading-relaxed text-justify">
+              <p>
+                CARDÆ produces custom storytelling objects &mdash; commissioned by you, owned by you, distributed by you. Each deck is an original editorial work: richly illustrated, carefully written, beautifully produced.
+              </p>
+              <p className="border-l-2 border-amber-600 pl-4 font-serif italic text-stone-500 py-1">
+                A coffee table book in card format. A piece of your history you can hold in your hands and give to the people who matter most. 
+              </p>
+              <p className="font-serif text-lg text-amber-700 font-semibold">
+                One story. One deck. Entirely yours.
+              </p>
+            </div>
+          </div>
+
+          <div className="h-px bg-stone-200" />
+
+          {/* HOW IT WORKS */}
+          <div className="space-y-10">
+            <div className="text-center space-y-2">
+              <span className="text-amber-700 font-mono tracking-widest text-xs uppercase font-semibold">Our Process</span>
+              <h3 className="text-3xl font-serif font-medium tracking-tight text-stone-900">How it works</h3>
+              <p className="text-stone-500 text-xs font-mono font-medium">Production time: 4–6 weeks from approved design.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              <div className="bg-white border border-stone-200 p-6 rounded-2xl relative space-y-3 shadow-sm hover:shadow transition-shadow">
+                <span className="absolute top-4 right-4 text-2xl font-serif italic text-amber-300/60 font-bold">01</span>
+                <h4 className="font-serif font-bold text-stone-900">Brief</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  We learn your story, your audience, and your strategic purpose.
+                </p>
+              </div>
+
+              <div className="bg-white border border-stone-200 p-6 rounded-2xl relative space-y-3 shadow-sm hover:shadow transition-shadow">
+                <span className="absolute top-4 right-4 text-2xl font-serif italic text-amber-300/60 font-bold">02</span>
+                <h4 className="font-serif font-bold text-stone-900">Content</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  We research, write, and structure 54–100 cards of genuine original text content.
+                </p>
+              </div>
+
+              <div className="bg-white border border-stone-200 p-6 rounded-2xl relative space-y-3 shadow-sm hover:shadow transition-shadow">
+                <span className="absolute top-4 right-4 text-2xl font-serif italic text-amber-300/60 font-bold">03</span>
+                <h4 className="font-serif font-bold text-stone-900">Illustration</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Original commissioned hand-drawn artwork &mdash; no photography rights required.
+                </p>
+              </div>
+
+              <div className="bg-white border border-stone-200 p-6 rounded-2xl relative space-y-3 shadow-sm hover:shadow transition-shadow">
+                <span className="absolute top-4 right-4 text-2xl font-serif italic text-amber-300/60 font-bold">04</span>
+                <h4 className="font-serif font-bold text-stone-900">Production</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Premium printing and assembly across three tiers to fit your budget.
+                </p>
+              </div>
+
+              <div className="bg-white border border-stone-200 p-6 rounded-2xl relative space-y-3 shadow-sm hover:shadow transition-shadow">
+                <span className="absolute top-4 right-4 text-2xl font-serif italic text-amber-300/60 font-bold">05</span>
+                <h4 className="font-serif font-bold text-stone-900">Delivery</h4>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Ready for your club shop, sponsor gifts, or direct player presentations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. WHY DIRECT DISTRIBUTION WORKS BETTER */}
+      <section className="py-24 border-t border-stone-200 bg-white px-4">
+        <div className="max-w-5xl mx-auto space-y-12">
+          
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="text-amber-700 font-mono tracking-widest text-[10px] uppercase font-semibold">Margin &amp; Ownership Strategy</span>
+            <h3 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-stone-955 italic">
+              Your deck. Your audience. Your margin.
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#FAF9F5] border border-stone-200 p-8 md:p-10 rounded-3xl relative overflow-hidden shadow-sm">
+            <div className="absolute top-0 left-0 w-48 h-48 bg-amber-500/[0.03] rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="lg:col-span-7 space-y-4 text-stone-700 text-sm leading-relaxed text-justify relative z-10 font-sans">
+              <p>
+                There is no retailer. No distributor. No shelf. You receive the finished decks and sell or gift them directly &mdash; through your club shop, your sponsor relationships, your player presentations, your event hospitality.
+              </p>
+              <p className="border-l-2 border-amber-600 pl-4 font-serif italic text-stone-600 py-1">
+                You keep the margin. You control the story.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 bg-white border border-stone-200 p-6 rounded-2xl relative z-10 shadow-sm border-l-4 border-l-amber-600">
+              <p className="text-xs md:text-sm font-serif italic text-stone-600 leading-relaxed text-center">
+                "Panini makes millions of identical products for anonymous consumers. We make one product for one club, for the people who love them most."
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. WHO WE ARE */}
+      <section className="py-24 border-t border-stone-200 bg-stone-100/40 px-4 scroll-mt-20" id="who-we-are">
+        <div className="max-w-5xl mx-auto space-y-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-5 space-y-4">
+              <span className="text-amber-700 font-mono tracking-widest text-xs uppercase block font-semibold">
+                Industry Excellence
+              </span>
+              <h2 className="text-3xl md:text-4xl font-serif text-stone-900 font-medium tracking-tight">
+                Who we are
+              </h2>
+              <div className="h-0.5 w-12 bg-amber-600 rounded mt-2" />
+            </div>
+
+            <div className="lg:col-span-7 space-y-6 text-stone-700 font-sans text-base leading-relaxed text-justify">
+              <p>
+                We are an experienced team with more than 20 years of active development, design, and commercialization expertise in the sports and entertainment collectible spaces, specializing in premium trading cards, custom physical formats, and iconic collector card decks.
+              </p>
+              <p className="border-l-2 border-amber-600 pl-4 font-serif italic text-stone-500 py-1 text-sm">
+                Leveraging decades of physical print mastery, creative publishing strategy, and brand archival mapping, we ensure that every custom deck we deliver is a flawless keepsake of your most celebrated milestones.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. STANDARD CONTACT FORM REQUEST */}
+      <section className="py-24 border-t border-stone-200 bg-[#FAF9F5] scroll-mt-20 px-4" id="get-started">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12" id="contact">
+          
+          {/* Left Column Text details */}
+          <div className="md:col-span-5 space-y-6">
+            <span className="text-amber-700 font-mono tracking-widest text-xs uppercase block font-semibold">Get Started</span>
+            <h3 className="text-3xl font-serif font-medium tracking-tight text-stone-900">
+              Tell us your story. <br className="hidden md:block" />
+              We'll tell you how we'd tell it.
+            </h3>
+          </div>
+
+          {/* Right Column: Premium Standard Contact Form with Ivory clean colors */}
+          <div className="md:col-span-7 bg-white border border-stone-200 rounded-3xl p-6 md:p-8 space-y-6 relative shadow-md">
+            <div className="absolute top-0 right-0 w-36 h-36 bg-amber-500/[0.03] rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-2">
+              <h4 className="text-lg font-serif font-bold text-stone-900 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-amber-700 rounded inline-block" />
+                Contact Our Editorial Desk
+              </h4>
+              <p className="text-stone-500 text-xs font-mono">Submit your brief below to receive a custom design proposal</p>
+            </div>
+
+            {contactSubmitted ? (
+              <div className="bg-amber-50/50 p-6 rounded-2xl border border-amber-600/30 text-center space-y-3 animate-fade-in">
+                <CheckCircle className="w-10 h-10 text-amber-700 mx-auto" />
+                <h5 className="font-serif font-bold text-stone-900 text-sm">Message Received Successfully</h5>
+                <p className="text-stone-600 text-xs leading-relaxed max-w-sm mx-auto">
+                  Hi {contactName}, thank you for reaching out. We have logged your request on behalf of <strong className="text-stone-900">{contactOrg || "your organization"}</strong>. Lead editor Alberto will correspond with you directly at <strong className="text-stone-950">{contactEmail}</strong> within 1 business day.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleContactSubmit} className="space-y-4 relative z-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block font-semibold">Your Name</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Your Name"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      className="w-full bg-[#FAF9F5] border border-stone-200 rounded-lg px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-600 transition-all font-sans"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block font-semibold">Organization / Company</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Sports Club or Company"
+                      value={contactOrg}
+                      onChange={(e) => setContactOrg(e.target.value)}
+                      className="w-full bg-[#FAF9F5] border border-stone-200 rounded-lg px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-600 transition-all font-sans"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block font-semibold">Corporate Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g., mail@yourbrand.com"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    className="w-full bg-[#FAF9F5] border border-stone-200 rounded-lg px-3 py-2 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-600 transition-all font-sans"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block font-semibold">Message / Outline</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Describe your timeline, celebration story, or key milestone details..."
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    className="w-full bg-[#FAF9F5] border border-stone-200 rounded-lg p-3 text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-amber-600 resize-none transition-all font-sans"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 px-4 bg-amber-700 hover:bg-amber-800 text-white rounded-lg font-mono text-xs tracking-wider uppercase font-bold transition-all shadow-md mt-2"
+                >
+                  Send Briefing Message
+                </button>
+              </form>
+            )}
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-stone-900 border-t border-stone-850 py-12 px-4 text-stone-300">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left space-y-1">
+            <span className="font-serif text-lg font-bold text-amber-500 tracking-widest">CARDÆ</span>
+            <p className="text-xs text-stone-400 max-w-sm leading-normal">
+              Bespoke card decks – premium editorial objects for clubs, brands, and historical communities cataloging legacies.
+            </p>
+          </div>
+
+          <div className="flex gap-6 text-[10px] font-mono tracking-widest text-[#B68B40] uppercase">
+            <span>© 2026 CARDÆ CO.</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
+}
